@@ -1,0 +1,17 @@
+{
+    "author": "Alexander Yastrebov <yastrebov.alex@gmail.com>",
+        "name": "report_render",
+        "description": "Render user report",
+        "version": "1.0.0",
+        "repository": {
+            "url": ""
+        },
+        "dependencies": {
+            "node-phantom": "0.2.5"
+        },
+        "devDependencies": {},
+        "optionalDependencies": {},
+        "engines": {
+            "node": "*"
+        }
+}
