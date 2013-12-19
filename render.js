@@ -47,7 +47,11 @@ exports.render = function(data, handler) {
             waitFor(function() {
                 page.evaluate(function(check) {
                     // Специальная проверка на строковое значение
-                    return (check && check !== 'undefined') ? this[check] : (document.readyState === 'complete');
+                    if (check && check !== 'undefined') {
+                        return this[check] === true;
+                    }else {
+                        return (document.readyState === 'complete');
+                    }
                 }, function(err, r) {
                     waitResult = r;
                 }, data.check);

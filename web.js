@@ -29,6 +29,7 @@ app.get('/render.png', function(req, res) {
         check: req.query.check
     };
     render.render(data, function(success, result, time) {
+        console.log('Render time: ' + time + 'ms');
         if (success) {
             res.set('Content-Type', 'image/png')
             res.send(200, new Buffer(result, 'base64'));
