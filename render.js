@@ -1,20 +1,20 @@
 var phantom = require('node-phantom');
-var ph;
 
-exports.init = function(cb) {
+var ph;
+var nconf;
+
+exports.init = function(cfg, cb) {
     if (ph) {
         ph.exit();
     }
+    nconf = cfg;
     phantom.create(function(err, instance) {
         ph = instance;
         if (cb) {
             cb();
         }
     }, {
-        parameters:{
-            'disk-cache': true
-        //'max-disk-cache-size': 10 * 1024
-        }
+        parameters: nconf.get('phantom')
     });
 }
 
@@ -25,7 +25,7 @@ exports.render = function(data, handler) {
         };
         console.log(JSON.stringify(data));
 
-        var ua = data.userAgent || 'Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36';
+        var ua = data.userAgent || nconf.get('userAgent');
         setUserAgent(page, ua);
 
         page.open(data.url, function(err, status) {
@@ -46,7 +46,8 @@ exports.render = function(data, handler) {
             var waitResult = false;
             waitFor(function() {
                 page.evaluate(function(check) {
-                    return check ? this[check] : (document.readyState === "complete");
+                    // Специальная проверка на строковое значение
+                    return (check && check !== 'undefined') ? this[check] : (document.readyState === 'complete');
                 }, function(err, r) {
                     waitResult = r;
                 }, data.check);

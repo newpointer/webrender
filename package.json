@@ -8,7 +8,8 @@
     },
     "dependencies": {
         "node-phantom": "0.2.5",
-        "express": "3.x"
+        "express": "3.x",
+        "nconf": "0.6.9"
     },
     "devDependencies": {},
     "optionalDependencies": {},

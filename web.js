@@ -1,9 +1,14 @@
 var express = require('express');
+var nconf = require('nconf');
 var render = require('./render');
 
 var app = express();
 
-render.init();
+nconf.argv().file({
+    file: './defaults.json'
+});
+
+render.init(nconf);
 
 app.get('/render.png', function(req, res) {
     if (!req.query.url){
@@ -34,5 +39,7 @@ app.get('/render.png', function(req, res) {
     });
 });
 
-app.listen(3000);
-console.log('Listening on port 3000');
+console.log('Config: ', JSON.stringify(nconf.get()));
+
+app.listen(nconf.get('port'));
+console.log('Listening on port ' + nconf.get('port'));
