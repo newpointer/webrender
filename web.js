@@ -26,7 +26,8 @@ app.get('/render.png', function(req, res) {
         url: req.query.url,
         userAgent: req.query.userAgent,
         // Какая глобальная переменная должна стать true для готовности страницы
-        check: req.query.check
+        check: req.query.check,
+        delay: req.query.delay
     };
     render.render(data, function(success, result, time) {
         console.log('Render time: ' + time + 'ms');

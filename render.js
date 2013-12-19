@@ -58,9 +58,16 @@ exports.render = function(data, handler) {
                 return waitResult;
             }, function(ready, time) {
                 if (ready) {
-                    page.renderBase64('png', function(err, data){
-                        handler(true, data, time)
-                    });
+                    var doRender = function() {
+                        page.renderBase64('png', function(err, data){
+                            handler(true, data, time)
+                        });
+                    }
+                    if (data.delay) {
+                        setTimeout(doRender, data.delay);
+                    } else {
+                        doRender();
+                    }
                 } else {
                     handler(false, {
                         error: 'timeout',
