@@ -1,4 +1,5 @@
 #!/bin/bash
 NODE=$(which nodejs || which node)
 
-$NODE main.js
+$NODE web.js
+#$NODE main.js

@@ -1,60 +1,35 @@
-var phantom = require("node-phantom");
-var ph;
+var fs = require('fs');
+var render = require('./render');
 
-exports.init = function() {
-    if (ph) {
-        ph.exit();
-    }
-    phantom.create(function(err, instance) {
-        ph = instance;
+function save(name, data, cb) {
+    fs.writeFile(name, data, function(err) {
+        if(err) {
+            console.log(err);
+        }
+        cb();
     });
 }
 
-exports.render = function(dataset, opts) {
-    return ph.createPage(function (err, page) {
-        page.onConsoleMessage = function(msg) {
-            console.log('page log:', msg);
-        };
-        var canvas = __dirname + '/canvas/report.html';
-        var data = {
-            view: {
-                zoom: 1,
-                width: 1024,
-                height: 768
-            },
-            report: {
-                title: 'Новый Отчет',
-                text: 'Это пример текста отчета'
-            }
-        };
-
-        return page.open(canvas, function(err, status) {
-            page.set('zoomFactor', data.view.zoom);
-
-            page.set('viewportSize', {
-                width: data.view.width * data.view.zoom,
-                height: data.view.height * data.view.zoom
+render.init(function() {
+    var data = {
+        view: {
+            zoom: 1,
+            width: 1024,
+            height: 768
+        },
+        report: {
+            title: 'Новый Отчет',
+            text: 'Это пример текста отчета'
+        }
+    };
+    render.render(data, function(err, result) {
+        if (err) {
+            console.log(JSON.stringify(result));
+        } else {
+            console.log('Сохраняем файл...');
+            save('example.png', new Buffer(result, 'base64'), function(){
+                process.exit(0);
             });
-            page.evaluate(function(d) {
-                render(d);
-            }, function() {
-                page.render('example.png');
-                ph.exit();
-            }, data);
-        });
+        }
     });
-}
-
-
-
-exports.init();
-
-setTimeout(function() {
-    exports.render({
-        x: 1,
-        y:2
-    }, {
-        z: 'hello',
-        y: 'world'
-    });
-}, 1000);
+});
