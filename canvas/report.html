@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Отчет</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8" />
+
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+        <style>
+            .content {
+                padding: 40px 15px;
+                text-align: center;
+            }
+        </style>
+
+        <script>
+            function render(data) {
+                console.log('render data:', JSON.stringify(data));
+
+                document.querySelector('#title').innerText = data.report.title;
+                document.querySelector('#text').innerText = data.report.text;
+            }
+        </script>
+    </head>
+    <body>
+        <div class='content'>
+            <h1 id='title'>Отчет</h1>
+            <p id='text'>
+                Текст отчета
+
+            </p>
+            <a class="btn btn-lg btn-primary">Трогни чтобы начать!</a>
+        </div>
+    </body>
+</html>
