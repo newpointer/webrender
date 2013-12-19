@@ -12,24 +12,26 @@ function save(name, data, cb) {
 
 render.init(function() {
     var data = {
-        view: {
-            zoom: 1,
-            width: 1024,
-            height: 768
-        },
-        report: {
-            title: 'Новый Отчет',
-            text: 'Это пример текста отчета'
-        }
+        timeout: 10000,
+        zoom: 1,
+        width: 1024,
+        height: 768,
+        url: __dirname + '/canvas/report.html',
+        // Какая глобальная переменная должна стать true для готовности страницы
+        check: 'REPORT_READY'
     };
-    render.render(data, function(err, result) {
-        if (err) {
-            console.log(JSON.stringify(result));
-        } else {
+    render.render(data, function(success, result, time) {
+        if (time) {
+            console.log('Время: ' + time + 'мс');
+        }
+        if (success) {
             console.log('Сохраняем файл...');
             save('example.png', new Buffer(result, 'base64'), function(){
                 process.exit(0);
             });
+        } else {
+            console.log('Ошибка экспорта:', JSON.stringify(result));
+            process.exit(1);
         }
     });
 });
