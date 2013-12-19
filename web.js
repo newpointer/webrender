@@ -19,6 +19,7 @@ app.get('/render.png', function(req, res) {
         width: req.query.width,
         height: req.query.height,
         url: req.query.url,
+        userAgent: req.query.userAgent,
         // Какая глобальная переменная должна стать true для готовности страницы
         check: req.query.check
     };

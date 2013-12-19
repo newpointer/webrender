@@ -23,7 +23,11 @@ exports.render = function(data, handler) {
         page.onConsoleMessage = function(msg) {
             console.log('page log:', msg);
         };
-        console.log('data: ', data);
+        console.log(JSON.stringify(data));
+
+        var ua = data.userAgent || 'Mozilla/5.0 (Windows NT 6.2; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1667.0 Safari/537.36';
+        setUserAgent(page, ua);
+
         page.open(data.url, function(err, status) {
             if (status != 'success'){
                 handler(false, {
@@ -77,4 +81,8 @@ function waitFor(testFx, onReady, timeOutMillis) {
     }, 250);
 }
 
-
+function setUserAgent(page, ua) {
+    // https://github.com/alexscheelmeyer/node-phantom/issues/83
+    // Хак! Не поддерживает вложенные свойства, но есть eval
+    page.setFn('EVIL_EVAL', 'page.settings.userAgent = "' + ua + '"');
+}
