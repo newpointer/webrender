@@ -5,14 +5,14 @@ var render = require('./render');
 var app = express();
 
 nconf.argv().file({
-    file: './defaults.json'
+    file: 'defaults.json'
 });
 
 render.init(nconf);
 
 app.get('/render.png', function(req, res) {
     if (!req.query.url){
-        res.send(400, {
+        res.json(400, {
             error: 'url_required',
             message: 'Параметр url обязателен'
         });
@@ -39,8 +39,7 @@ app.get('/render.png', function(req, res) {
 
             msg = 'SUCCESS:';
         } else {
-            res.set('Content-Type', 'application/json');
-            res.json(result);
+            res.json(500, result);
 
             msg = 'ERROR: ' + JSON.stringify(result);
         }
