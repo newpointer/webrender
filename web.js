@@ -45,3 +45,4 @@ console.log('Config: ', JSON.stringify(nconf.get()));
 
 app.listen(nconf.get('port'));
 console.log('Listening on port ' + nconf.get('port'));
+
