@@ -1,0 +1,568 @@
+/* Bootstrap */
+
+.bootstrap {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* Base */
+.no-wrap {
+    white-space: nowrap;
+}
+
+.comment-widget {
+    color: #404040;
+}
+
+.comment-widget a, 
+.comment-widget div, 
+.comment-widget span {
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+    font-weight: normal;
+    font-size: 100%;
+    text-transform: none;
+}
+.comment-widget span {
+    display: inline;
+    height: auto;
+}
+.comment-widget form {
+    margin: 0;
+}
+
+.comment-widget a, 
+.comment-widget a:active, 
+.comment-widget a:focus {
+    outline: none;
+}
+.comment-widget a:focus {
+    -moz-outline-style: none;
+}
+.comment-widget :-moz-any-link:focus {
+  outline: none;
+}
+
+.comment-widget .wait {
+    background: transparent url(./i/ajax-loader-bar.gif) no-repeat 50% 50%;
+}
+.comment-widget .error .wait {
+    background-image: url(./i/ajax-loader-bar-error.gif);
+}
+
+.comment-widget .align-right {
+    text-align: right;
+}
+
+.comment-widget .not-visible {
+    visibility: hidden;
+}
+
+.comment-widget .disabled {
+    color: #808080;
+}
+
+.comment-widget .span-w30 {
+    width: 30px;
+}
+.comment-widget .span-w50 {
+    width: 50px;
+}
+.comment-widget .span-w80 {
+    width: 80px;
+}
+.comment-widget .span-w120 {
+    width: 120px;
+}
+.comment-widget .span-w150 {
+    width: 150px;
+}
+.comment-widget .span-w200 {
+    width: 200px;
+}
+.comment-widget .span-w230 {
+    width: 230px;
+}
+.comment-widget .span3h {
+    width: 190px;
+}
+
+.comment-widget .btn.small-s {
+    font-size: 11px;
+    padding: 2px 5px 3px 5px;
+    line-height: normal;
+}
+
+.comment-widget .attach-file {
+  position: relative;
+  overflow: hidden;
+}
+.comment-widget .attach-file input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 50px 0 0 0;
+  border: solid transparent;
+  border-width: 0 0 100px 200px;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -moz-transform: translate(-300px, 0) scale(4);
+  direction: ltr;
+  cursor: pointer;
+}
+.comment-widget .attach-file input.active {
+    margin: 0;
+}
+
+.comment-widget .attach-file-upload {
+    position: absolute;
+    width: 0;
+    overflow: hidden;
+}
+
+/* TODO reposition icons.png */
+.comment-widget .action {
+    cursor: pointer;
+}
+.comment-widget .action .icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    padding: 0;
+    background: transparent url(./i/icons.png) no-repeat 0 0;
+}
+.comment-widget .action.small .icon {
+    height: 14px;
+    background-position: 0 1px;
+}
+.comment-widget .action.small.active .icon {
+    background-position: 0 -15px;
+}
+
+/* TODO refactoring .actions .action */
+.comment-widget .actions .action {
+    display: inline-block;
+    height: 16px;
+    margin: 0 5px 0 0;
+    padding: 0;
+    font-size: 11px;
+    cursor: pointer;
+    background: transparent url(./i/icons.png) no-repeat 0 0;
+}
+.comment-widget .actions.align-right .action {
+    margin: 0 0 0 5px;
+}
+.comment-widget .actions.small.align-right .action {
+    height: 12px;
+    margin: 0 2px 0 3px;
+}
+
+.comment-widget .actions .action.attachments {
+    width: 24px;
+    background-position: -16px 0;
+}
+.comment-widget .actions .action.attachments.active {
+    background-position: -16px -16px;
+}
+.comment-widget .actions .action.scope {
+    width: 28px;
+    background-position: -40px 0;
+}
+.comment-widget .actions .action.scope.active {
+    background-position: -40px -16px;
+}
+.comment-widget .actions .action.scope.error {
+    background-position: -40px -32px;
+}
+.comment-widget .actions .action.scope.active.error {
+    background-position: -40px -48px !important;
+}
+.comment-widget .actions .action.edit {
+    width: 16px;
+    background-position: -68px 0;
+}
+.comment-widget .actions .action.edit.active {
+    background-position: -68px -16px;
+}
+.comment-widget .actions .action.delete,
+.comment-widget .actions .action.detach {
+    width: 16px;
+    background-position: -100px 0;
+}
+.comment-widget .actions .action.delete.active,
+.comment-widget .actions .action.detach.active {
+    background-position: -100px -16px;
+}
+.comment-widget .actions.small .action.delete,
+.comment-widget .actions.small .action.detach {
+    width: 12px;
+    background-position: -116px 0;
+}
+.comment-widget .actions.small .action.delete.active,
+.comment-widget .actions.small .action.detach.active {
+    background-position: -116px -16px;
+}
+
+.comment-widget .icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    padding: 0;
+    font-size: 11px;
+    cursor: default;
+    background: transparent url(./i/icons.png) no-repeat 0 0;
+    
+    zoom: 1;
+}
+.comment-widget .icon.error {
+    width: 16px;
+    background-position: -132px 0;
+}
+.comment-widget .icon.success {
+    width: 16px;
+    background-position: -148px 0;
+}
+
+.comment-widget .attachment-list {
+    padding: 0;
+}
+.comment-widget .attachment-list .attachment {
+    font-size: 11px;
+    padding: 0 0 5px 0;
+    color: #0064AA;
+}
+.comment-widget .attachment-list a {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* CommentWidget */
+.comment-widget {
+    position: absolute;
+    display: none;
+    margin: 0;
+    padding: 0;
+    background: transparent none;
+    overflow: hidden;
+    
+    width: 492px; /* .modal width + border */
+}
+
+.comment-widget .modal {
+    position: relative; 
+    left: auto; 
+    top: auto; 
+    margin: 0 auto; 
+    z-index: 1;
+    overflow: hidden;
+    
+    width: 490px;
+}
+.comment-widget .widget-body {
+    padding: 15px;
+}
+.comment-widget .modal-header .close {
+    cursor: pointer;
+}
+.comment-widget .modal-header .help {
+    cursor: pointer;
+    font-size:11px;
+    font-weight:normal;
+    margin-right:15px;
+    color: black;
+    padding-top:1px;
+}
+.comment-widget .comment-list {
+    margin: 10px 0 0 0;
+}
+.comment-widget .comment-list:first-child {
+    margin: -5px 0 0 0 !important;
+    border-top: 0 none !important;
+}
+.comment-widget .comment-list .no-comments {
+    color: #808080;
+    text-align: center;
+    padding-top: 10px;
+    font-size: 13px;
+}
+.comment-widget .comment-list .comment-view {
+    margin-top: 5px;
+    border-top: 1px solid #f0f0f0;
+}
+.comment-widget .comment-list .comment-view:first-child {
+    margin-top: 0 !important;
+    border-top: 0 none !important;
+}
+.comment-widget .comment-list .comment-view .wrapper {
+    margin-top: -1px !important;
+}
+.comment-widget .comment-list .comment-view .wrapper.private {
+    background-color: #f0f0f0 !important;
+}
+.comment-widget .btn.add-comment {
+    width: 80px;
+    text-align: center;
+}
+
+.comment-widget .add-comment-cnt {
+    margin: 10px 0 0 0;
+}
+
+.comment-widget .more-comments {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.comment-widget .more-comments .btn {
+    width: 100%;
+    background: transparent none;
+    padding: 0;
+}
+/* Fix IE */
+.comment-widget .more-comments .btn span {
+    display: block;
+    height: 16px;
+    padding: 5px 0;
+    text-align: center;
+}
+.comment-widget .more-comments .btn:hover {
+    background-color: #e6e6e6;
+}
+.comment-widget .more-comments .btn.disabled,
+.comment-widget .more-comments .btn[disabled] {
+    color: #808080;
+    background: transparent none !important;
+}
+.bootstrap .btn-mini {
+    line-height: 14px;
+    padding: 2px 6px;
+}
+/* EditCommentWidget */
+.comment-widget .edit-comment-widget {
+    display: none;
+}
+.comment-widget .edit-comment-widget .editor {
+    width: 450px;
+    min-width: 450px;
+    max-width: 450px;
+    height: 80px;
+    margin-bottom: 5px;
+    color: #333;
+}
+.comment-widget .edit-comment-widget .editor.error {
+    border-color: #E9322D !important;
+}
+
+.comment-widget .edit-comment-widget .actions {
+    background: transparent none;
+    margin: 0 0 0 20px;
+    padding: 5px 0 0 0;
+    border: 0 none;
+}
+
+.comment-widget .edit-comment-widget .attachment-list.exist {
+    margin-bottom: 5px;
+}
+
+.comment-widget .edit-comment-widget .attachment-list.new {
+    margin-bottom: 10px;
+}
+.comment-widget .edit-comment-widget .attachment-list.new .info {
+    width: 415px;
+}
+.comment-widget .edit-comment-widget .attachment-list.new .info .name {
+    width: 405px;
+    font-size: 11px;
+    margin-bottom: 0;
+    padding: 1px 4px;
+    color: #333;
+}
+.comment-widget .edit-comment-widget .attachment-list.new .status {
+    width: 16px;
+    height: 20px;
+    margin-left: 4px;
+    padding-top: 0;
+}
+.comment-widget .edit-comment-widget .attachment-list.new .status .icon {
+    vertical-align: top;
+    margin-top: 4px;
+}
+.comment-widget .edit-comment-widget .attachment-list.new .actions {
+    width: 25px;
+    height: 20px;
+    margin-left: 0;
+    padding-top: 0;
+}
+.comment-widget .edit-comment-widget .attachment-list.new .actions .action {
+    vertical-align: top;
+    margin-top: 7px;
+}
+
+.comment-widget .edit-comment-widget .scope-view {
+    margin-bottom: 15px;
+}
+
+/* CommentView */
+.comment-widget .comment-view .wrapper {
+    width: 465px;
+    margin: 0 0 0 -4px; 
+    padding: 2px 0 0 5px; 
+}
+.comment-widget .comment-view .info {
+    padding-bottom: 5px;
+}
+.comment-widget .comment-view .author {
+    color: #0064AA;
+    font-size: 11px;
+}
+.comment-widget .comment-view .date {
+    color: #0064AA;
+    font-size: 11px;
+    text-align: right;
+}
+
+.comment-widget .comment-view .content {
+    padding-bottom: 5px;
+    overflow-x: auto;
+    font-size: 13px;
+}
+
+.comment-widget .comment-view .footer {
+    padding-bottom: 5px;
+}
+
+.comment-widget .comment-view .footer .status-info {
+}
+
+.comment-widget .comment-view .status-info .moderation,
+.comment-widget .comment-view .status-info .verification {
+    font-size: 11px;
+    color: #505050;
+    display: inline-block;
+    margin-top: 3px;
+}
+.comment-widget .comment-view .status-info .verification {
+    color: #333;
+    margin-top: 1px;
+}
+.comment-widget .comment-view .status-info .moderation.action {
+    color: #333;
+    margin-top: 0px;
+}
+.comment-widget .comment-view .action.active[class*="action-tab-"] {
+    color: #0064AA;
+}
+.comment-widget .comment-view .action.small.active .icon {
+    background-position: 0 -63px;
+}
+.comment-widget .comment-view .actions .action.attachments.active {
+    background-position: -16px -64px;
+}
+.comment-widget .comment-view .actions .action.scope.active {
+    background-position: -40px -64px;
+}
+
+.comment-widget .comment-view .status-info .question {
+    cursor: help;
+}
+
+.comment-widget .comment-view .actions {
+    background: transparent none;
+    margin: 0 0 0 20px;
+    padding: 1px 0 0 0;
+    border: 0 none;
+}
+.comment-widget .comment-view .actions.small {
+    padding-top: 5px;
+}
+
+.comment-widget .comment-view .attachment-list-view {
+    margin-bottom: 5px;
+}
+
+.comment-widget .comment-view .scope-view {
+    margin-bottom: 5px;
+}
+.comment-widget .comment-view .scope-view h5 {
+    display: none;
+}
+
+/* NewAttachmentView */
+.comment-widget .new-attachment-view {
+    font-size: 11px;
+    padding: 0 0 5px 0;
+}
+
+/* ScopeView */
+.comment-widget .scope-view .wait {
+    height: 20px;
+}
+.comment-widget .scope-view h5 {
+    font-size: 11px;
+    line-height: 25px;
+    color: #505050;
+}
+.comment-widget .scope-view label {
+    float: none;
+    width: auto;
+    padding: 0;
+    font-size: 11px;
+    text-align: left;
+}
+.comment-widget .scope-view label span {
+    padding-left: 5px;
+    font-size: 11px;
+}
+.comment-widget .scope-view label input {
+    margin-top: 1px;
+}
+.comment-widget .scope-view label.error span {
+    color: #E9322D;
+    font-weight: bold;
+}
+.comment-widget .scope-view .share-groups {
+    padding-top: 5px;
+}
+
+/* ModerateView */
+.comment-widget .moderate-view {
+    font-size: 11px;
+}
+.comment-widget .moderate-view div {
+    color: #0064AA;
+}
+.comment-widget .moderate-view .row {
+    margin-bottom: 5px;
+}
+.comment-widget .moderate-view .moderator-name  {
+    margin-left: 7px;
+}
+.comment-widget .moderate-view .moderation-actions {
+    padding-top: 5px;
+    min-height: 20px;
+}
+.comment-widget .moderate-view input.rejection-reason-action {
+    width: 200px;
+    font-size: 11px;
+    margin-bottom: 0;
+    padding: 0px 4px;
+    color: #333;
+    vertical-align: top;
+}
+.comment-widget .moderate-view .reject.btn {
+    margin: 0 0 0 1px;
+    vertical-align: top;
+}
+
+/* ActionsView */
+.comment-widget .action-pane {
+    display: none;
+    margin: 0 0 0 20px;
+    color: #0064AA;
+}
+.comment-widget .action-pane label {
+    color: #0064AA;
+}

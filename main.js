@@ -12,7 +12,7 @@ nconf.defaults({
         zoom: 1,
         width: 1024,
         height: 768,
-        url: __dirname + '/canvas/report.html',
+        url: __dirname + '/canvas/adelanta.html',
         // Какая глобальная переменная должна стать true для готовности страницы
         check: 'REPORT_READY'
     }
@@ -34,7 +34,7 @@ render.init(nconf, function() {
         }
         if (success) {
             console.log('Сохраняем файл...');
-            save('example.png', new Buffer(result, 'base64'), function(){
+            save('out/adelanta.png', new Buffer(result, 'base64'), function(){
                 process.exit(0);
             });
         } else {
