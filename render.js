@@ -32,9 +32,8 @@ exports.exit = function(cb) {
 exports.render = function(data, handler) {
     ph.createPage(function (err, page) {
         page.onConsoleMessage = function(msg) {
-            console.log('page log:', msg);
+            console.log('Page log:', msg);
         };
-        console.log(JSON.stringify(data));
 
         var ua = data.userAgent || nconf.get('userAgent');
         setUserAgent(page, ua);
@@ -60,18 +59,18 @@ exports.render = function(data, handler) {
                     // Специальная проверка на строковое значение
                     if (check && check !== 'undefined') {
                         return this[check] === true;
-                    }else {
+                    } else {
                         return (document.readyState === 'complete');
                     }
                 }, function(err, r) {
                     waitResult = r;
                 }, data.check);
                 return waitResult;
-            }, function(ready, time) {
+            }, function(ready) {
                 if (ready) {
                     var doRender = function() {
-                        page.renderBase64('png', function(err, data){
-                            handler(true, data, time)
+                        page.renderBase64('png', function(err, data) {
+                            handler(true, data);
                         });
                     }
                     if (data.delay) {
@@ -82,8 +81,8 @@ exports.render = function(data, handler) {
                 } else {
                     handler(false, {
                         error: 'timeout',
-                        message: 'Превышен лимит ожидания отчета'
-                    }, time);
+                        message: 'Превышен лимит ожидания'
+                    });
                 }
             }, data.timeout);
         });
@@ -95,10 +94,11 @@ function waitFor(testFx, onReady, timeOutMillis) {
     start = new Date().getTime(),
     condition = false,
     interval = setInterval(function() {
-        if ( (new Date().getTime() - start < maxtimeOutMillis) && !condition ) {
+        var now = new Date().getTime();
+        if ( ((now - start) < maxtimeOutMillis) && !condition ) {
             condition = testFx()
         } else {
-            onReady(condition, (new Date().getTime() - start));
+            onReady(condition);
             clearInterval(interval);
         }
     }, 250);

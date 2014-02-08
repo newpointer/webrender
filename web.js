@@ -29,15 +29,22 @@ app.get('/render.png', function(req, res) {
         check: req.query.check,
         delay: req.query.delay
     };
-    render.render(data, function(success, result, time) {
-        console.log('Render time: ' + time + 'ms');
+
+    var start = new Date().getTime();
+    render.render(data, function(success, result) {
+        var msg, now = new Date().getTime();
         if (success) {
             res.set('Content-Type', 'image/png')
             res.send(200, new Buffer(result, 'base64'));
+
+            msg = 'SUCCESS:';
         } else {
             res.set('Content-Type', 'application/json');
             res.json(result);
+
+            msg = 'ERROR: ' + JSON.stringify(result);
         }
+        console.log(msg + ' ' + JSON.stringify(data) + ' in ' + (now - start) + ' ms');
     });
 });
 
