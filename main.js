@@ -20,10 +20,16 @@ nconf.defaults({
 
 function save(name, data, cb) {
     fs.writeFile(name, data, function(err) {
-        if(err) {
-            console.log(err);
+        if (err) {
+            console.error(err);
         }
         cb();
+    });
+}
+
+function shutdown(code) {
+    render.exit(function() {
+        process.exit(code);
     });
 }
 
@@ -34,12 +40,12 @@ render.init(nconf, function() {
         }
         if (success) {
             console.log('Сохраняем файл...');
-            save('out/adelanta.png', new Buffer(result, 'base64'), function(){
-                process.exit(0);
+            save('out/adelanta.png', new Buffer(result, 'base64'), function() {
+                shutdown(0);
             });
         } else {
             console.log('Ошибка экспорта:', JSON.stringify(result));
-            process.exit(1);
+            shutdown(1);
         }
     });
 });

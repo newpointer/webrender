@@ -2,20 +2,31 @@ var phantom = require('node-phantom');
 
 var ph;
 var nconf;
+var noop = function() {};
 
 exports.init = function(cfg, cb) {
-    if (ph) {
-        ph.exit();
-    }
     nconf = cfg;
+    cb = cb || noop;
+
     phantom.create(function(err, instance) {
         ph = instance;
-        if (cb) {
-            cb();
-        }
+        cb();
     }, {
         parameters: nconf.get('phantom')
     });
+}
+
+exports.exit = function(cb) {
+    cb = cb || noop;
+    if (ph) {
+        // https://github.com/alexscheelmeyer/node-phantom/issues/85
+        ph.exit(function() {
+            cb();
+        });
+    } else {
+        console.error('ERROR: No phantom instance');
+        cb();
+    }
 }
 
 exports.render = function(data, handler) {
