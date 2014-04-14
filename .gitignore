@@ -3,3 +3,12 @@ example.png
 *.log
 
 out/
+
+tmp/
+.tmp*
+
+/.DS_Store
+.DS_Store
+
+/.project
+/.settings
