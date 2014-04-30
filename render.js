@@ -35,6 +35,20 @@ exports.render = function(data, handler) {
             console.log('Page log:', msg);
         };
 
+        page.onError = function(msg, trace) {
+            var msgStack = ['ERROR: ' + msg];
+
+            if (trace && trace.length) {
+                msgStack.push('TRACE:');
+
+                trace.forEach(function(t) {
+                    msgStack.push(' -> ' + t.file + ': ' + t.line + (t.function ? ' (in function "' + t.function +'")' : ''));
+                });
+            }
+
+            console.error(msgStack.join('\n'));
+        };
+
         var ua = data.userAgent || nconf.get('userAgent');
         setUserAgent(page, ua);
 
