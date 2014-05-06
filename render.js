@@ -31,10 +31,11 @@ exports.exit = function(cb) {
 
 exports.render = function(data, handler) {
     ph.createPage(function (err, page) {
-        page.onConsoleMessage = function(msg) {
-            console.log('Page log:', msg);
-        };
-
+        if (nconf.get('pageLog')) {
+            page.onConsoleMessage = function(msg) {
+                console.log('Page log:', msg);
+            };
+        }
         page.onError = function(msg, trace) {
             var msgStack = ['ERROR: ' + msg];
 
