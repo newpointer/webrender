@@ -9,7 +9,8 @@
     "dependencies": {
         "node-phantom": "0.2.5",
         "express": "3.x",
-        "nconf": "0.6.9"
+        "nconf": "0.6.9",
+        "dateformat": "1.0.7-1.2.3"
     },
     "devDependencies": {},
     "optionalDependencies": {},

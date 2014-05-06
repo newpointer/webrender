@@ -1,5 +1,6 @@
 var express = require('express');
 var nconf = require('nconf');
+var dateFormat = require('dateformat');
 var render = require('./render');
 
 var app = express();
@@ -30,20 +31,20 @@ app.get('/render.png', function(req, res) {
         delay: req.query.delay
     };
 
-    var start = new Date().getTime();
+    var start = new Date();
     render.render(data, function(success, result) {
-        var msg, now = new Date().getTime();
+        var msg, now = new Date();
         if (success) {
             res.set('Content-Type', 'image/png')
             res.send(200, new Buffer(result, 'base64'));
 
-            msg = 'SUCCESS:';
+            msg = '[SUCCESS]';
         } else {
             res.json(500, result);
 
-            msg = 'ERROR: ' + JSON.stringify(result);
+            msg = '[ERROR] ' + JSON.stringify(result);
         }
-        console.log(msg + ' ' + JSON.stringify(data) + ' in ' + (now - start) + ' ms');
+        console.log(dateFormat(now, 'dd.mm.yyyy HH:MM:ss') + ' ' + msg + ' ' + JSON.stringify(data) + ' in ' + (now.getTime() - start.getTime()) + ' ms');
     });
 });
 
