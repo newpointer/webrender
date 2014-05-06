@@ -96,6 +96,14 @@ function PageHandler(page, data, handler) {
             }
         }, function(err, clip) {
             if (clip) {
+                if (clip.left < 0) {
+                    clip.width += clip.left;
+                    clip.left = 0;
+                }
+                if (clip.top < 0) {
+                    clip.height += clip.top;
+                    clip.top = 0;
+                }
                 page.set('clipRect', clip);
             }
             page.renderBase64('png', function(err, data) {
