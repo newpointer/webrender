@@ -10,8 +10,6 @@ nconf.defaults({
     'data':{
         timeout: 10000,
         zoom: 1,
-        width: 1024,
-        height: 768,
         url: __dirname + '/canvas/adelanta.html',
         // Какая глобальная переменная должна стать true для готовности страницы
         check: 'REPORT_READY'

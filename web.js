@@ -22,12 +22,12 @@ app.get('/render.png', function(req, res) {
     var data = {
         timeout: req.query.timeout,
         zoom: req.query.zoom || 1,
-        width: req.query.width,
-        height: req.query.height,
         url: req.query.url,
         userAgent: req.query.userAgent,
-        // Какая глобальная переменная должна стать true для готовности страницы
+        // (Необязательно) Какая глобальная переменная должна стать true для готовности страницы
         check: req.query.check,
+        // (Необязательно) Какой элемент рендерить
+        selector: req.query.selector,
         delay: req.query.delay
     };
 
