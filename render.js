@@ -2,11 +2,16 @@ var phantom = require('node-phantom');
 
 var ph;
 var nconf;
-var noop = function() {};
 
-function pageLog(msg) {
-    console.log('Page log:', msg);
-};
+function noop() {
+}
+
+function phantomCrashHandler(code, signal) {
+    console.warn('phantom crash: signal', signal);
+    // https://github.com/alexscheelmeyer/node-phantom/issues/80
+    // Убиваем себя, чтобы внешний скрипт мог нас перезапустить
+    process.exit(code ? 100 + code : 2);
+}
 
 exports.init = function(cfg, cb) {
     nconf = cfg;
@@ -14,47 +19,41 @@ exports.init = function(cfg, cb) {
 
     phantom.create(function(err, instance) {
         ph = instance;
+        ph._phantom.on('exit', phantomCrashHandler);
         cb();
     }, {
         parameters: nconf.get('phantom')
     });
-}
+};
 
 exports.exit = function(cb) {
     cb = cb || noop;
     if (ph) {
+        ph._phantom.removeListener('exit', phantomCrashHandler);
         // https://github.com/alexscheelmeyer/node-phantom/issues/85
-        ph.exit(function() {
-            cb();
-        });
+        ph.exit(cb);
     } else {
         console.error('ERROR: No phantom instance');
         cb();
     }
-}
+};
 
 exports.render = function(data, handler) {
     ph.createPage(function(err, page) {
-        page.onConsoleMessage = nconf.get('pageLog') ? pageLog : noop;
-
+        if (nconf.get('pageLog')) {
+            page.onConsoleMessage = function(msg) {
+                console.log('LOG:', msg);
+            };
+            page.onError = function(msg) {
+                console.error('ERROR:', msg);
+            };
+        }
         new PageHandler(page, data, handler).open();
     });
-}
+};
 
 function PageHandler(page, data, handler) {
     var status, statusText;
-
-    page.onError = function(msg, trace) {
-        var msgStack = ['ERROR: ' + msg];
-        if (trace && trace.length) {
-            msgStack.push('TRACE:');
-
-            trace.forEach(function(t) {
-                msgStack.push(' -> ' + t.file + ': ' + t.line + (t.function ? ' (in function "' + t.function +'")' : ''));
-            });
-        }
-        console.error(msgStack.join('\n'));
-    };
 
     // https://github.com/ariya/phantomjs/issues/10185
     page.onResourceReceived = function(response) {
@@ -71,18 +70,18 @@ function PageHandler(page, data, handler) {
 
     function waitFor(testFx, onReady, timeOutMillis) {
         var maxtimeOutMillis = timeOutMillis ? timeOutMillis : 3000,
-        start = new Date().getTime(),
-        condition = false,
-        interval = setInterval(function() {
-            var now = new Date().getTime();
-            if ( ((now - start) < maxtimeOutMillis) && !condition ) {
-                condition = testFx()
-            } else {
-                onReady(condition);
-                clearInterval(interval);
-            }
-        }, 250);
-    };
+                start = new Date().getTime(),
+                condition = false,
+                interval = setInterval(function() {
+                    var now = new Date().getTime();
+                    if (((now - start) < maxtimeOutMillis) && !condition) {
+                        condition = testFx();
+                    } else {
+                        onReady(condition);
+                        clearInterval(interval);
+                    }
+                }, 250);
+    }
 
     function doRender() {
         page.evaluate(function(data) {
@@ -110,10 +109,10 @@ function PageHandler(page, data, handler) {
                 handler(true, data);
             });
         }, data);
-    };
+    }
 
     function handleOpen(err, st) {
-        if (st !== 'success' || status !== 200) {
+        if (st !== 'success' || (status && status !== 200)) {
             handler(false, {
                 error: 'open_fail',
                 message: 'Не удалось открыть страницу',
@@ -149,7 +148,7 @@ function PageHandler(page, data, handler) {
                 });
             }
         }, data.timeout);
-    };
+    }
 
     return {
         open: function() {

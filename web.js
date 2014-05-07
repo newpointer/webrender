@@ -12,7 +12,7 @@ nconf.argv().file({
 render.init(nconf);
 
 app.get('/render.png', function(req, res) {
-    if (!req.query.url){
+    if (!req.query.url) {
         res.json(400, {
             error: 'url_required',
             message: 'Параметр url обязателен'
@@ -35,7 +35,7 @@ app.get('/render.png', function(req, res) {
     render.render(data, function(success, result) {
         var msg, now = new Date();
         if (success) {
-            res.set('Content-Type', 'image/png')
+            res.set('Content-Type', 'image/png');
             res.send(200, new Buffer(result, 'base64'));
 
             msg = '[SUCCESS]';
@@ -52,4 +52,3 @@ console.log('Config: ', JSON.stringify(nconf.get()));
 
 app.listen(nconf.get('port'));
 console.log('Listening on port ' + nconf.get('port'));
-
