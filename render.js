@@ -84,6 +84,9 @@ function PageHandler(page, data, handler) {
     }
 
     function doRender() {
+        if (typeof data.selector === 'undefined' && data.width && data.height) {
+            page.set('viewportSize', {width: data.width, height: data.height});
+        }
         page.evaluate(function(data) {
             document.body.style.webkitTransform = "scale(" + data.zoom + ")";
             document.body.style.webkitTransformOrigin = "0% 0%";

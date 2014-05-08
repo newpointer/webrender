@@ -28,6 +28,9 @@ app.get('/render.png', function(req, res) {
         check: req.query.check,
         // (Необязательно) Какой элемент рендерить
         selector: req.query.selector,
+        // (Необязательно) Ширина и высота окна, если не указан selector
+        width: req.query.width,
+        height: req.query.height,
         delay: req.query.delay
     };
 
