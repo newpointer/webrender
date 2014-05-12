@@ -9,8 +9,6 @@ nconf.argv().file({
     file: 'defaults.json'
 });
 
-render.init(nconf);
-
 app.get('/render.png', function(req, res) {
     if (!req.query.url) {
         res.json(400, {
@@ -51,7 +49,11 @@ app.get('/render.png', function(req, res) {
     });
 });
 
-console.log('Config: ', JSON.stringify(nconf.get()));
+render.init(nconf, run);
 
-app.listen(nconf.get('port'));
-console.log('Listening on port ' + nconf.get('port'));
+function run() {
+    console.log('Config:', JSON.stringify(nconf.get()));
+    console.log('Listening on port', nconf.get('port'));
+
+    app.listen(nconf.get('port'));
+}

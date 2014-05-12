@@ -57,6 +57,9 @@ function PageHandler(page, data, handler) {
 
     // https://github.com/ariya/phantomjs/issues/10185
     page.onResourceReceived = function(response) {
+//        if (response.status !== null && response.stage === 'end') {
+//            console.log(response.url, response.status);
+//        }
         // NB: Точное совпадение URL. Может поломаться из-за небольших различий типа слеша в конце
         if (response.status !== null && response.stage === 'end' && response.url === data.url) {
             status = response.status;
