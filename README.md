@@ -5,12 +5,13 @@
     
         ln -s /srv/phantomjs-1.9.7-linux-i686/bin/phantomjs /usr/bin/
 
-* [Forever](https://github.com/nodejitsu/forever#installation) / [Keep a node.js server up with Forever](http://blog.nodejitsu.com/keep-a-nodejs-server-up-with-forever/)
+* [How I deploy node apps on Linux, 2015 edition](https://medium.com/@mikemaccana/how-i-deploy-node-apps-on-linux-2014-edition-309d606219ca)
+
 * [webrender](http://repo.nkb/git/gitweb.cgi?p=nullpointer/webrender.git;a=summary)
 
         git clone git@repo.nkb:nullpointer/webrender.git
         cd webrender && npm install
-        forever start /srv/webrender/web.js
+        systemctl start webrender.service
 
 
 Кеш PhantomJS

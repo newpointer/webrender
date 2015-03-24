@@ -1,0 +1,12 @@
+[Unit]
+Description=Webrender API
+After=network.target
+
+[Service]
+ExecStart=/srv/webrender/web.sh
+WorkingDirectory=/srv/webrender/
+Restart=always
+User=nobody
+Group=nobody
+Environment=PATH=/usr/bin:/usr/local/bin
+Environment=NODE_ENV=production
