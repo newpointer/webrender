@@ -9,7 +9,7 @@
 
 * [webrender](http://repo.nkb/git/gitweb.cgi?p=nullpointer/webrender.git;a=summary)
 
-        git clone git@repo.nkb:nullpointer/webrender.git
+        git clone git@github.com:newpointer/webrender.git
         cd webrender && npm install
         systemctl start webrender.service
 
